@@ -114,10 +114,11 @@
             pkgs.libtool
             pkgs.pkg-config
             pkgs.python3
-            pkgs.util-linux       # provides hexdump (required by configure)
             pkgs.git
             pkgs.clang
             pkgs.llvmPackages.libclang
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+            pkgs.util-linux       # provides hexdump on Linux; macOS ships /usr/bin/hexdump
           ];
 
           buildInputs = [
@@ -192,8 +193,9 @@
             pkgs.automake
             pkgs.libtool
             pkgs.python3
-            pkgs.util-linux
             pkgs.git
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+            pkgs.util-linux       # provides hexdump on Linux; macOS ships /usr/bin/hexdump
           ];
 
           buildInputs = [
